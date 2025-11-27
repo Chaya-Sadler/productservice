@@ -1,9 +1,6 @@
 package com.chayasadler.productservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -26,16 +23,22 @@ public class Product {
 
     public Product(){}
 
-    public Product(String name, String description, Double price, String unit, String productCategory,
-                   LocalDateTime createdAt) {
+    public Product(String name, String description, Double price, String unit, String productCategory) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.unit = unit;
         this.productCategory = productCategory;
-        this.createdAt = createdAt;
     }
 
+    @PrePersist
+    public void prePersist(){
+        createdAt = LocalDateTime.now();
+    }
+    @PostUpdate
+    public void postUpdate(){
+        updateAt = LocalDateTime.now();
+    }
     public UUID getId() {
         return id;
     }

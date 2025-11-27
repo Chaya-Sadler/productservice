@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/app")
 public class ProductController {
 
     private final ProductService productService;
@@ -19,7 +19,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("products")
+    @PostMapping("/products")
     public ResponseEntity<String> createProducts(@RequestBody ProductRequest product) {
         return productService.createProducts(product);
     }
@@ -29,19 +29,20 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
-    @GetMapping("products")
+    @GetMapping("/products")
     public List<ProductResponse> getAllProducts() {
         return productService.getAllProducts();
     }
 
-    @PutMapping("products/{id}")
+    @PutMapping("/products/{id}")
     public ResponseEntity<String> updateProductById(@PathVariable UUID id, @RequestBody ProductRequest productRequest) {
         return productService.updateProductById(id, productRequest);
     }
 
     @DeleteMapping("products/{id}")
-    public void deleteProduct(@PathVariable UUID id) {
-        productService.deleteProduct(id);
+    public ResponseEntity<String>  deleteProduct(@PathVariable UUID id) {
+
+        return productService.deleteProduct(id);
     }
 
 }

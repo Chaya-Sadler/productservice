@@ -28,7 +28,7 @@ public class ProductService {
     public ResponseEntity<String> createProducts(ProductRequest productRequest) {
 
         Product product = new Product(productRequest.name(), productRequest.description(), productRequest.price(),
-                productRequest.unit(), productRequest.category(), LocalDateTime.now());
+                productRequest.unit(), productRequest.category());
         product.setActive(true);
         iProductRepository.save(product);
 
@@ -56,7 +56,6 @@ public class ProductService {
         product.setProductCategory(productRequest.category());
         product.setPrice(productRequest.price());
         product.setUnit(productRequest.unit());
-        product.setUpdateAt(LocalDateTime.now());
 
         iProductRepository.save(product);
 
