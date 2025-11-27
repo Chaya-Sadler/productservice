@@ -35,8 +35,8 @@ public class Product {
     public void prePersist(){
         createdAt = LocalDateTime.now();
     }
-    @PostUpdate
-    public void postUpdate(){
+    @PreUpdate
+    public void preUpdate(){
         updateAt = LocalDateTime.now();
     }
     public UUID getId() {
